@@ -7,7 +7,9 @@ import tools.jackson.databind.JsonNode;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
+@SuppressWarnings("unused")
 public class TestResult implements Serializable {
 
     // Attributes
@@ -65,6 +67,12 @@ public class TestResult implements Serializable {
 
     public Language getLanguage() {
         return language;
+    }
+
+    public HashMap<Kink, Integer> getScoreMap() {
+        var map = new HashMap<Kink, Integer>();
+        for (var score : scores) map.put(score.kink(), score.score());
+        return map;
     }
 
     // Score record

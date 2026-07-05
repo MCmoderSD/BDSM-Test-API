@@ -44,9 +44,11 @@ public class BdsmTestApi {
 
     // Build request body
     private static String buildRequestBody(String authSig, String resultId, Language language) {
-        return "uauth[authsig]=" + URLEncoder.encode(authSig, UTF_8)
-                + "&rauth[rid]=" + URLEncoder.encode(resultId, UTF_8)
-                + "&lang=" + URLEncoder.encode(language.getCode(), UTF_8);
+        return String.format("uauth[authsig]=%s&rauth[rid]=%s&lang=%s",
+                URLEncoder.encode(authSig, UTF_8),
+                URLEncoder.encode(resultId, UTF_8),
+                URLEncoder.encode(language.getCode(), UTF_8)
+        );
     }
 
     // Build HTTP request
