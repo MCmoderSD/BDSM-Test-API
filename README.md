@@ -26,7 +26,7 @@ Add the dependency to your `pom.xml` file:
 ```xml
 <dependency>
     <groupId>de.MCmoderSD</groupId>
-    <artifactId></artifactId>
+    <artifactId>BDSM-Test-API</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
