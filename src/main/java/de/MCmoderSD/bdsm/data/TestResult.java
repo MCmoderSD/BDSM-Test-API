@@ -7,7 +7,9 @@ import tools.jackson.databind.JsonNode;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class TestResult implements Serializable {
@@ -79,6 +81,16 @@ public class TestResult implements Serializable {
         return map;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, version, timestamp, gender, ageGroup, Arrays.hashCode(scores), language);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj.getClass() == getClass() && hashCode() == obj.hashCode();
+    }
+
     // Score record
     public record Score(
             Kink kink,
@@ -109,6 +121,16 @@ public class TestResult implements Serializable {
 
         public String description(Language language) {
             return kink.getDescription(language);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(kink, score);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj.getClass() == getClass() && hashCode() == obj.hashCode();
         }
     }
 }

@@ -3,6 +3,7 @@ package de.MCmoderSD.bdsm.data;
 import tools.jackson.databind.JsonNode;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @SuppressWarnings("unused")
 public record MatchResult(int score, TestResult result, TestResult partner) implements Serializable {
@@ -30,5 +31,15 @@ public record MatchResult(int score, TestResult result, TestResult partner) impl
 
     public TestResult getPartner() {
         return partner;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(score, result, partner);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj.getClass() == getClass() && hashCode() == obj.hashCode();
     }
 }
