@@ -8,6 +8,7 @@ A simple Java wrapper for fetching results from [BDSMTest.org](https://bdsmtest.
 - Multiple language support
 - Typed results (no manual JSON parsing)
 - Works out of the box, no setup needed
+- Fetch a match between two results
 
 ## Usage
 
@@ -27,38 +28,61 @@ Add the dependency to your `pom.xml` file:
 <dependency>
     <groupId>de.MCmoderSD</groupId>
     <artifactId>BDSM-Test-API</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
 ### Usage Example
 
+### Fetch a result by its ID
 ```java
 import de.MCmoderSD.bdsm.core.BdsmTestApi;
 
 import static de.MCmoderSD.bdsm.enums.Language.English;
+import static java.lang.IO.println;
 
 void main() {
 
     // Initialize the API
     var api = new BdsmTestApi();
-    var result = api.fetchResult("your_result_id_here");
+    var result = api.fetchResult("your_result_id_here"); // Replace with your actual result ID
     var language = English;
 
     // Print the result
-    IO.println("Result ID: " + result.getId());
-    IO.println("Version: " + result.getVersion());
-    IO.println("Result: " + result.getGender());
-    IO.println("Age Group: " + result.getAgeGroup());
-    IO.println("Timestamp: " + result.getTimestamp());
-    IO.println("Language: " + result.getLanguage());
+    println("Result ID: " + result.getId());
+    println("Version: " + result.getVersion());
+    println("Result: " + result.getGender());
+    println("Age Group: " + result.getAgeGroup());
+    println("Timestamp: " + result.getTimestamp());
+    println("Language: " + result.getLanguage());
 
     // Print scores
     for (var score : result.getScores()) {
-        IO.println(score.name((language)) + ": " + score.score() + "%");
-        IO.println("- " + score.pairdesc((language)));
-        IO.println("- " + score.description((language)));
-        IO.println();
+        println(score.name((language)) + ": " + score.score() + "%");
+        println("- " + score.pairdesc((language)));
+        println("- " + score.description((language)));
+        println();
     }
+}
+```
+
+### Fetch a match between two results
+```java
+import de.MCmoderSD.bdsm.core.BdsmTestApi;
+
+import static java.lang.IO.*;
+
+void main() {
+
+    // Initialize the API
+    var api = new BdsmTestApi();
+
+    // Get user input for result IDs
+    var yourID = readln("Enter your result ID: ").trim();
+    var partnerID = readln("Enter your partner's result ID: ").trim();
+
+    // Fetch and display the match result
+    var matchResult = api.fetchMatch(yourID, partnerID);
+    println("Your Compatibility Score: " + matchResult.getScore() + "%");
 }
 ```

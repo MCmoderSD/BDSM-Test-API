@@ -24,6 +24,10 @@ public class TestResult implements Serializable {
     // Constructor
     public TestResult(String id, JsonNode result) {
 
+        // Validate inputs
+        if (id == null || id.isBlank() || id.contains(" ")) throw new IllegalArgumentException("Invalid result ID: " + id);
+        if (result == null || result.isNull() || result.isEmpty()) throw new IllegalArgumentException("Invalid result data: " + result);
+
         // Set ID
         this.id = id;
 

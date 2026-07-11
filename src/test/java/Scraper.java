@@ -35,8 +35,8 @@ void main() throws IOException {
 
     // Compress that JSON into a separate .gz file
     var gzipFile = new File("data.json.gz");
-    try (var gzipOutputStream = new GZIPOutputStream(new FileOutputStream(gzipFile))) {
-        gzipOutputStream.write(Files.readAllBytes(jsonFile.toPath()));
+    try (var gos = new GZIPOutputStream(new FileOutputStream(gzipFile))) {
+        gos.write(Files.readAllBytes(jsonFile.toPath()));
     }
 
     // Clean Up
