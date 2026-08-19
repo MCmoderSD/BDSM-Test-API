@@ -28,7 +28,7 @@ Add the dependency to your `pom.xml` file:
 <dependency>
     <groupId>de.MCmoderSD</groupId>
     <artifactId>BDSM-Test-API</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.3</version>
 </dependency>
 ```
 
